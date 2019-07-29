@@ -27,14 +27,15 @@ class Config:
             with open(self.conf_file, "w") as f:
                 f.write(yaml.dump(defaults))
         else:
-            self.config = yaml.load(f.read())
+            with open(self.conf_file, "r") as f:
+                self.config = yaml.load(f.read())
 
     def __getitem__(self, key):
         return self.config[key]
 
     def __setitem__(self, key, value):
         self.config[key] = value
-        with open(self.conf_file, "r") as f:
+        with open(self.conf_file, "w") as f:
             f.write(yaml.dump(self.config))
 
     def __contains__(self, item):
