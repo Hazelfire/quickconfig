@@ -28,7 +28,7 @@ class Config:
                 f.write(yaml.dump(defaults))
         else:
             with open(self.conf_file, "r") as f:
-                self.config = yaml.load(f.read())
+                self.config = yaml.safe_load(f.read())
 
     def __getitem__(self, key):
         return self.config[key]
